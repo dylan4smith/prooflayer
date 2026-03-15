@@ -168,7 +168,8 @@ footer{flex-direction:column;text-align:center}
   <p class="hero-sub">AI builds your workbooks in minutes. Verifying every formula against raw data takes hours. ProofLayer automates the verification so you don't have to.</p>
 
   <!-- EMAIL FORM — uses Netlify Forms (submissions stored in Netlify dashboard) -->
-  <form class="sf" id="heroForm" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">    <!-- Honeypot for spam protection -->
+  <form class="sf" id="heroForm" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="waitlist">
     <input name="bot-field" class="hp" tabindex="-1" autocomplete="off">
 
     <input type="email" name="email" placeholder="you@company.com" required>
@@ -298,7 +299,9 @@ footer{flex-direction:column;text-align:center}
   <h2>Be the first to stop verifying spreadsheets by hand</h2>
   <p>Join the waitlist for early access. Help us build the tool you already need.</p>
 
-  <form class="sf" id="btmForm" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">    <input name="bot-field" class="hp" tabindex="-1" autocomplete="off">
+  <form class="sf" id="btmForm" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="waitlist">
+    <input name="bot-field" class="hp" tabindex="-1" autocomplete="off">
     <input type="email" name="email" placeholder="you@company.com" required>
     <button type="submit">Join Waitlist</button>
   </form>
@@ -316,6 +319,7 @@ document.querySelectorAll('form[data-netlify="true"]').forEach(form => {
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const formData = new FormData(form);
+    formData.append('form-name', 'waitlist');
     try {
       await fetch('/', {
         method: 'POST',
